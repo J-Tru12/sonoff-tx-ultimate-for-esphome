@@ -703,7 +703,8 @@ script:
     mode: restart
     then:
       - light.turn_off:
-          id: leds_top
+          id: leds
+      - script.execute: refresh_led_default
 
   - id: led_on_touch
     mode: restart
