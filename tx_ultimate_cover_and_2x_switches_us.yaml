@@ -36,7 +36,7 @@ substitutions:
 
   long_press_brightness: "1"
   long_press_color: "{100,0,0}"
-  long_press_effect: ""
+  long_press_effect: "Scan"
 
   multi_touch_brightness: "1"
   multi_touch_color: "{0,0,0}"
@@ -530,15 +530,14 @@ light:
           transition_length: 600ms
           update_interval: 300ms
 
-media_player:
+speaker:
   - platform: i2s_audio
     id: media_out
-    name: ${friendly_name} Player
     dac_type: external
     i2s_dout_pin: ${audio_sdata_pin}
     i2s_audio_id: audio_i2s
-    i2s_comm_fmt: lsb
-    mode: mono
+    i2s_comm_fmt: i2s_lsb
+    channel: mono
 
 i2s_audio:
   id: audio_i2s
