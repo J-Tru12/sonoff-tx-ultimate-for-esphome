@@ -570,8 +570,6 @@ script:
   - id: refresh_led_default
     mode: restart
     then:
-      - light.turn_off: leds_top
-
       - if:
           condition:
             lambda: "return (${relay_count}>1 && id(relay_1).state) ;"
@@ -600,8 +598,17 @@ script:
           condition:
             lambda: "return id(nightlight).state || id(nightlight_active).state;"
           then:
+            - light.turn_on:
+                id: leds_top
+                brightness: ${nightlight_brightness}
+                red: !lambda "return id(nightlight_color)[0]/100.0;"
+                green: !lambda "return id(nightlight_color)[1]/100.0;"
+                blue: !lambda "return id(nightlight_color)[2]/100.0;"
+                effect: "None"
             - script.execute: led_on_nightlight
           else:
+            - light.turn_off:
+                id: leds_top
             - light.turn_off: leds_nightlight
 
   - id: led_on_button_left

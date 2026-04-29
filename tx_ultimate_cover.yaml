@@ -705,6 +705,9 @@ script:
             - light.turn_on: 
                 id: leds_top
                 brightness: ${nightlight_brightness}
+                red: !lambda "return id(nightlight_color)[0]/100.0;"
+                green: !lambda "return id(nightlight_color)[1]/100.0;"
+                blue: !lambda "return id(nightlight_color)[2]/100.0;"
                 effect: "None"
             - script.execute: led_on_nightlight
           else:
